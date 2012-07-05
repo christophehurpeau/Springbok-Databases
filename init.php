@@ -43,12 +43,12 @@ file_put_contents($databasesDir.'config/_'.$env.'.php',"<?php return array(
 	
 	'db'=>array(
 		'_lang'=>dirname(__DIR__).'/db/',
-		'default'=>array('type'=>'SQLite', 'file'=>dirname(__DIR__).'/webmanager.db',),
+		'default'=>array('type'=>'SQLite', 'file'=>dirname(__DIR__).'/database.db',),
 		'mysql'=>array( 'type'=>'MySQL','host'=>'localhost','dbname'=>'mysql', 'user'=>'mysql','password'=>'mysql'),
 	),
 	'generate'=>array('default'=>true,'mysql'=>false),
 	
-	'export_dir'=>'".`cd ~ && pwd`."/SQL/'
+	'export_dir'=>'".trim(`cd ~ && pwd`)."/SQL/'
 );");
 
 file_put_contents($databasesDir.'config/routes.php',"<?php return array(
