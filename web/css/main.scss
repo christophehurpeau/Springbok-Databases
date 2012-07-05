@@ -1,0 +1,25 @@
+$PAGE_FIXED:true;
+@includeCore 'colors/blueorange.scss';
+@includeCore 'default.scss';
+@includeCore 'icons/tables.scss';
+@includeCore 'components/contextmenu.scss';
+
+@includeLib 'jquery.filetree.css';
+@includeLib 'jquery.contextMenu.css';
+@includeLib 'codemirror/codemirror.css';
+@includeLib 'codemirror/themes/elegant.css';
+
+
+.icon.sb{background:url('../img/favicon.png')}
+
+.dbsqlcode .CodeMirror-scroll{
+	height:75px
+}
+
+.sqlresult table.table{
+	background:#cecece
+}
+
+.sqlresult table.table tr:hover{
+	background:lighten($INTERACTION_HOVER_COLOR,50%);
+}
