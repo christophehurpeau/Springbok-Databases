@@ -1,11 +1,11 @@
 <?php
 $databasesDir=dirname(__DIR__).'/';
-$baseDir=dirname($webmanagerDir).'/';
+$baseDir=dirname($databasesDir).'/';
 
 echo shell_exec('cd '.escapeshellarg($databasesDir).' && ln -s src/enhance.php');
 
 $coreDir=$baseDir.'core/dev/';
-file_put_contents($webmanagerDir.'cli.php',"<?php
+file_put_contents($databasesDir.'cli.php',"<?php
 define('DS', DIRECTORY_SEPARATOR);
 define('CORE','".$coreDir."');
 define('APP', __DIR__.DS.'dev'.DS);
@@ -13,8 +13,8 @@ define('APP', __DIR__.DS.'dev'.DS);
 $action=array_shift($argv);'."
 include CORE.'cli.php';");
 
-mkdir($webmanagerDir.'config');
-echo shell_exec('cd '.escapeshellarg($webmanagerDir).'src && ln -s ../config && cd .. && ln -s src/db');
+mkdir($databasesDir.'config');
+echo shell_exec('cd '.escapeshellarg($databasesDir).'src && ln -s ../config && cd .. && ln -s src/db');
 
 $env=include $baseDir.'core/env.php';
 
