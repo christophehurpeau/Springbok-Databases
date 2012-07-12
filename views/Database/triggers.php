@@ -1,7 +1,7 @@
 <?php $v=new View(_t('Process list'),'database') ?>
 <div class="content">
 {ife $triggers}
-<div class="message warning">No Triggers</div>
+<div class="mWarning">No Triggers</div>
 {else}
 <table>
 	<tr>
