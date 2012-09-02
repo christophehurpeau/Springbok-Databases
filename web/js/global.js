@@ -14,4 +14,4 @@ includeLib('codemirror/hints/sql');
 */
 includeCore('springbok.contextmenu');
 
-includeLib('ht5ifv-0.9.7');
+includeCore('ht5ifv');

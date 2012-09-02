@@ -1,22 +1,40 @@
 <?php
 class DatabaseController extends AController{
-	/**
-	* id > @Required
-	* dbname > @Required
-	*/ function view(int $id,$dbname){
+	/** @Id @NotEmpty('dbname') */
+	function view(int $id,$dbname){
 		self::db_init($id,$dbname);
 		self::render();
 	}
 	
 	
-	/**
-	* id > @Required
-	* dbname > @Required
-	*/ function tables(int $id,$dbname){
+	/** @Id @NotEmpty('dbname') */
+	function tables(int $id,$dbname){
 		self::db_init($id,$dbname);
 		set('tables',self::$db_instance->doSelectRows('SHOW TABLE STATUS'));
 		self::render();
 	}
+	
+	
+	/** @Id @NotEmpty('dbname') */
+	function sql(int $id,$dbname,$sql){
+		self::db_init($id,$dbname);
+		mset($sql);
+		if(!empty($sql)){
+			try{
+				$qsql=new QSql(self::$db_instance,$sql);
+				mset($qsql);
+				if($qsql->isSelect()){
+					$dbSchema=DBSchema::get(self::$db_instance,$tablename);
+					$table=ACSqlDbTable::create($qsql,$tablename,$dbSchema);
+					set('table',$table);
+				}else set('result',$qsql->execute());
+			}catch(DBException $ex){
+				set('ex',$ex);
+			}
+		}
+		self::render();
+	}
+	
 	
 	/** */
 	function del_table($tablename,int $id,$dbname){
@@ -42,13 +60,16 @@ class DatabaseController extends AController{
 	/**
 	 * tables > @Type(array[])
 	*/
-	function export(int $id,$dbname,$tables){
+	function export(int $id,$dbname,$tables,bool $echo){
 		self::db_init($id,$dbname);
-		if(CHttpRequest::isPOST()){
+		if(isset($_GET['echo'])){
 			UExec::exec('mysqldump -h '.escapeshellarg(self::$server->host).' --port='.self::$server->port
 				.' -u '.escapeshellarg(self::$server->user).' --password='.escapeshellarg(self::$server->password())
-				.' '.escapeshellarg($dbname).(empty($tables)?'':implode(',',$tables)).' > '.escapeshellarg(Config::$export_dir.date('Y-m-d_H:i').'-'.$dbname.'.sql'));
-			redirect(self::$server->linkdb($dbname));
+				.' '.escapeshellarg($dbname).(empty($tables)?'':implode(',',$tables)).' > '.escapeshellarg($filenameexport=(Config::$export_dir.date('Y-m-d_H:i').'-'.$dbname.'.sql')));
+			if($echo){
+				set('result',file_get_contents($filenameexport));
+				render('export_result');
+			}else redirect(self::$server->linkdb($dbname));
 		}else{
 			self::render();
 		}
