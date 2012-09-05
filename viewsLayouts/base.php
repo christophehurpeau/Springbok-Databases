@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<? HHtml::doctype() ?>
 <html>
 	<head>
 		<? HHtml::metaCharset() ?>
