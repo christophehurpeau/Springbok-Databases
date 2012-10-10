@@ -17,17 +17,17 @@ class TableController extends AController{
 		/*if(!CHttpRequest::isAjax()) redirect(array('/database/:dbid/:dbname/:action/*',$dbid,$dbname,'table','/'.$tablename));*/
 		self::db_init($id,$dbname,$tablename);
 		if($sql===NULL) $sql='SELECT * FROM '.$tablename;
-		set('sql',$sql);
+		mset($sql);
 		try{
 			$sql=new QSql(self::$db_instance,$sql);
-			set_('qsql',$sql);
+			set('qsql',$sql);
 			if($sql->isSelect()){
 				$dbSchema=DBSchema::get(self::$db_instance,$tablename);
 				$table=ACSqlDbTable::create($sql,$tablename,$dbSchema);
 				set('table',$table);
 			}else set('result',$sql->execute());
 		}catch(DBException $ex){
-			set_('ex',$ex);
+			set('ex',$ex);
 		}
 		render();
 	}
