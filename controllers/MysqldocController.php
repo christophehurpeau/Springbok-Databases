@@ -2,7 +2,6 @@
 class MysqldocController extends Controller{
 	public static function beforeRender(){
 		self::setForLayout('categories',EMCategory::generateSimpleTreeList(NULL,'parent_category_id'));
-		return true;
 	}
 	
 	/** */

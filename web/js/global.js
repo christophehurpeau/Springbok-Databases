@@ -9,9 +9,9 @@ define('AJAX_CONTENT_EFFECT',false);
 
 includeLib('codemirror/codemirror');
 includeLib('codemirror/modes/plsql/plsql');
-/*includeLib('codemirror/hints/simple-hint');
-includeLib('codemirror/hints/sql');
+/*include Lib('codemirror/hints/simple-hint');
+include Lib('codemirror/hints/sql');
 */
 includeCore('springbok.contextmenu');
 
-includeLib('ht5ifv-0.9.7');
+includeCore('ht5ifv');
