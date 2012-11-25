@@ -42,7 +42,6 @@ file_put_contents($databasesDir.'config/_'.$env.'.php',"<?php return array(
 	'php_doc_dir'=>dirname(__DIR__).'/php-chunked-xhtml/',
 	
 	'db'=>array(
-		'_lang'=>dirname(__DIR__).'/db/',
 		'default'=>array('type'=>'SQLite', 'file'=>dirname(__DIR__).'/database.db',),
 		'mysql'=>array( 'type'=>'MySQL','host'=>'localhost','dbname'=>'mysql', 'user'=>'mysql','password'=>'mysql'),
 	),
