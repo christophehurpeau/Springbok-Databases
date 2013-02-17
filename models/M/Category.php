@@ -1,6 +1,8 @@
 <?php
 /** @Db('mysql') @Generate('mysql') @TableName('help_category') @TableAlias('c') */
-class EMCategory extends STreeModel{
+class EMCategory extends SSqlModel{
+	use BTree;
+	
 	public
 		/** @Pk */ $help_category_id,
 		/** */ $name,
