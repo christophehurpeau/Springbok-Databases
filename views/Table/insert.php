@@ -24,6 +24,5 @@
 			}
 		}
 		echo $form->end();
-		echo HHtml::jsInline('$("#formInsert'.$tablename.'").ht5ifv();');
 	?>
 </div>

@@ -3,6 +3,7 @@ $PAGE_FIXED:true;
 @includeCore 'default.scss';
 @includeCore 'icons/tables.scss';
 @includeCore 'components/contextmenu.scss';
+@includeCore 'ui/validation';
 
 @includeLib 'jquery.filetree.css';
 @includeLib 'jquery.contextMenu.css';
