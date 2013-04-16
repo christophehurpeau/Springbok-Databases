@@ -1,0 +1,17 @@
+Database:
+  New: Nouvelle base de donnée
+  id: Id
+  name: Nom
+  host: Hôte
+  port: Port
+  user: Utilisateur
+  password: Mot de passe
+Server:
+  "": Serveur
+  New: Nouveau serveur
+  id: Id
+  name: Nom
+  host: Hôte
+  port: Port
+  user: Utilisateur
+  password: Mot de passe

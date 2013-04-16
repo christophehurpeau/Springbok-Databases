@@ -102,7 +102,7 @@ class TableController extends AController{
 		$dbSchema=DBSchema::get(self::$db_instance,$tablename);
 		$columns=$dbSchema->getColumns(); // $columns=self::$db_instance->getColumns($tablename);
 		$pks=$dbSchema->getPrimaryKeys(); //self::$db_instance->getPrimaryKeys($tablename);
-		$phpcode="/** @TableAlias() */\nclass ".UInflector::camelize(UInflector::singularizeUnderscoredWords($tablename))." extends SSqlModel{\n"
+		$phpcode="/** @TableAlias() */\nclass ".UString::camelize(UInflector::singularizeUnderscoredWords($tablename))." extends SSqlModel{\n"
 			."\tpublic\n";
 		foreach($columns as $col)
 			$phpcode.="\t\t/** ".(in_array($col['name'],$pks)?'@Pk ':'').($col['autoincrement']?'@AutoIncrement ':'')."@SqlType('".$col['type']."') @".($col['notnull']?'Not':'')."Null ".($col['default']||$col['default']==='0'?"@Default(".$col['default'].")":'').($col['comment']?" @Comment(".UPhp::exportString($col['comment']).")":'')."\n"
