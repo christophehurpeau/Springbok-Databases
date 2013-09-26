@@ -1,14 +1,14 @@
 <?php
 class DatabaseController extends AController{
 	/** @Id @NotEmpty('dbname') */
-	function view(int $id,$dbname){
+	static function view(int $id,$dbname){
 		self::db_init($id,$dbname);
 		self::render();
 	}
 	
 	
 	/** @Id @NotEmpty('dbname') */
-	function tables(int $id,$dbname){
+	static function tables(int $id,$dbname){
 		self::db_init($id,$dbname);
 		set('tables',self::$db_instance->doSelectRows('SHOW TABLE STATUS'));
 		self::render();
@@ -16,7 +16,7 @@ class DatabaseController extends AController{
 	
 	
 	/** @Id @NotEmpty('dbname') */
-	function sql(int $id,$dbname,$sql){
+	static function sql(int $id,$dbname,$sql){
 		self::db_init($id,$dbname);
 		mset($sql);
 		if(!empty($sql)){
@@ -37,21 +37,21 @@ class DatabaseController extends AController{
 	
 	
 	/** */
-	function del_table($tablename,int $id,$dbname){
+	static function del_table($tablename,int $id,$dbname){
 		self::db_init($id,$dbname);
 		self::$db_instance->doUpdate('DROP TABLE `'.$tablename.'`');
 		redirect(self::$server->linkdb($dbname,'tables'));
 	}
 	
 	/** */
-	function triggers(int $id,$dbname){
+	static function triggers(int $id,$dbname){
 		self::db_init($id,$dbname);
 		set('triggers',self::$db_instance->doSelectRows('SHOW TRIGGERS'));
 		self::render();
 	}
 	
 	/** */
-	function del_trigger($triggername,int $id,$dbname){
+	static function del_trigger($triggername,int $id,$dbname){
 		self::db_init($id,$dbname);
 		self::$db_instance->doUpdate('DROP TRIGGER `'.$triggername.'`');
 		redirect(self::$server->linkdb($dbname,'triggers'));
@@ -60,7 +60,7 @@ class DatabaseController extends AController{
 	/**
 	 * tables > @Type(array[])
 	*/
-	function export(int $id,$dbname,$tables,bool $echo){
+	static function export(int $id,$dbname,$tables,bool $echo){
 		self::db_init($id,$dbname);
 		if(isset($_GET['echo'])){
 			UExec::exec('mysqldump -h '.escapeshellarg(self::$server->host).' --port='.self::$server->port

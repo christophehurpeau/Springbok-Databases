@@ -5,14 +5,14 @@ class MysqldocController extends Controller{
 	}
 	
 	/** */
-	function index(){
+	static function index(){
 		self::render();
 	}
 	
 	/** @ValidParams
 	 * id > @Required
 	 */
-	function category(int $id){
+	static function category(int $id){
 		$categ=EMCategory::findOneByHelp_category_id($id);
 		if(empty($categ)) notFound();
 		$categ->findWith('Topic',array('fields'=>'help_topic_id,name'));
@@ -21,7 +21,7 @@ class MysqldocController extends Controller{
 	}
 	
 	/** */
-	function topic(int $id){
+	static function topic(int $id){
 		$topic=EMTopic::findOneByHelp_topic_id($id);
 		if(empty($topic)) notFound();
 		self::mset($topic);

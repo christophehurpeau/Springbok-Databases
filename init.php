@@ -55,13 +55,13 @@ file_put_contents($databasesDir.'config/routes.php',"<?php return array(
 	'/robots'=>array('Site::robots','ext'=>'txt'),'/'=>array('Site::index'),
 	
 	'/:id'=>array('Servers::view',null,array('fr'=>'/:id')),
-	'/:id/:action/*'=>array('Servers::!',null,array('fr'=>'/:id/:action/*')),
+	'/:id/:action/*'=>array('Servers::index',null,array('fr'=>'/:id/:action/*')),
 	
 	'/:id-:dbname/table/:tablename'=>array('Table::view',array('dbid'=>'[0-9]+'),array('fr'=>'/:id-:dbname/table/:tablename')),
-	'/:id-:dbname/table/:tablename/:action/*'=>array('Table::!',array('dbid'=>'[0-9]+'),array('fr'=>'/:id-:dbname/table/:tablename/:action/*')),
+	'/:id-:dbname/table/:tablename/:action/*'=>array('Table::index',array('dbid'=>'[0-9]+'),array('fr'=>'/:id-:dbname/table/:tablename/:action/*')),
 	
 	'/:id-:dbname'=>array('Database::view',array('sid'=>'[0-9]+'),array('fr'=>'/:id-:dbname')),
-	'/:id-:dbname/:action/*'=>array('Database::!',array('dbid'=>'[0-9]+'),array('fr'=>'/:id-:dbname/:action/*')),
+	'/:id-:dbname/:action/*'=>array('Database::index',array('dbid'=>'[0-9]+'),array('fr'=>'/:id-:dbname/:action/*')),
 	
-	'/:controller(/:action/*)?'=>array('!::!'),
+	'/:controller(/:action/*)?'=>array('Site::index'),
 );");

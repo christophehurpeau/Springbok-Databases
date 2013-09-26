@@ -36,7 +36,7 @@ class TableController extends AController{
 	
 	
 	/** */
-	function details($pkValue,int $id,$dbname,$tablename,$sql){
+	static function details($pkValue,int $id,$dbname,$tablename,$sql){
 		self::db_init($dbid,$dbname,$tablename);
 		self::mset($pkValue);
 		
@@ -65,7 +65,7 @@ class TableController extends AController{
 	}
 	
 	/** */
-	function structure(int $id,$dbname,$tablename){
+	static function structure(int $id,$dbname,$tablename){
 		self::db_init($id,$dbname,$tablename);
 		$dbSchema=DBSchema::get(self::$db_instance,$tablename);
 		$columns=$dbSchema->getColumns(); //self::$db_instance->getColumns($tablename);
@@ -76,7 +76,7 @@ class TableController extends AController{
 	
 	
 	/** */
-	function insert(int $id,$dbname,$tablename){
+	static function insert(int $id,$dbname,$tablename){
 		self::db_init($id,$dbname,$tablename);
 		
 		if(!empty($_POST)){
@@ -97,7 +97,7 @@ class TableController extends AController{
 	}
 	
 	/** */
-	function phpcode(int $id,$dbname,$tablename){
+	static function phpcode(int $id,$dbname,$tablename){
 		self::db_init($id,$dbname,$tablename);
 		$dbSchema=DBSchema::get(self::$db_instance,$tablename);
 		$columns=$dbSchema->getColumns(); // $columns=self::$db_instance->getColumns($tablename);
@@ -114,7 +114,7 @@ class TableController extends AController{
 	}
 	
 	/** */
-	function export(int $id,$dbname,$tablename){
+	static function export(int $id,$dbname,$tablename){
 		self::db_init($id,$dbname,$tablename);
 		if(CHttpRequest::isPOST()){
 			UExec::exec('mysqldump -h '.escapeshellarg(self::$server->host).' --port='.self::$server->port

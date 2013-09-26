@@ -1,7 +1,7 @@
 <?php
 class ServersController extends AController{
 	/** */
-	function index(){
+	static function index(){
 		redirect('/');
 	}
 	
